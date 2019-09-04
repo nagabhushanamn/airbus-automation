@@ -18,10 +18,8 @@ const AppointmentsDayView = ({ appointments }) => {
                         {
                             appointments.map((appointment, i) => {
                                 return (
-                                    <li key={appointment.startsAt} className="list-group-item">
-                                        <button type="button" onClick={e => setSelectedAppointment(i)}>
-                                            {appointmentTimeOfDay(appointment.startsAt)}
-                                        </button>
+                                    <li key={appointment.startsAt} style={{cursor:'pointer'}} className="list-group-item" onClick={e => setSelectedAppointment(i)}>
+                                        {appointmentTimeOfDay(appointment.startsAt)}
                                     </li>
                                 )
                             })
