@@ -1,0 +1,232 @@
+
+
+
+
+
+--------------------------------------
+web-ui
+--------------------------------------
+
+
+UI  ==> content/data + style + behavior
+
+
+
+ content  ==> HTML
+ style    ==> CSS
+ behavior ==> javascript
+
+
+---------------------------------------------------------------------------------------
+
+what javascript language can do on HTML-page 
+in browser envi?
+
+
+
+using browser provided web-APIs,
+JavaScript-lang can bring any dynamic activity/data to web-page
+
+
+browser-APIs :  ==> are based on 'w3c' recommendations,
+implemented nativly by browser vendors & abstracted as JavaScript objects & functions
+
+
+browser-APIs  :
+    ==> DOM, XHR,Timer,....
+
+using DOM API
+---------------
+    ( page manipulation )
+ -> can create,retreive,update,delete HTML elements
+ -> can change element's inner text/html content 
+ -> can change element's attributes/properties
+ -> can change element's styles ( css )
+ -> can validate form-fields before submit to server-program
+ -> can create rich UI-components like  autocomplete, calenders,..
+ -> can listen any events on element..
+ ...
+
+using XHR/Fetch API
+------------------------
+ -> can communicate with server-side programs async
+
+using Timer API
+----------------
+-> can execute any action on timeout/time-interval
+
+
+HTML5 APIs
+------------------
+ - https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/HTML5
+
+
+
+
+
+problems/limitations with plain-js ( your-code ) with browser-apis
+------------------------------------------------------------------
+
+
+==> browser compatability issues
+     http://www.caniuse.com
+==> memory management issues need to handle manualy
+    (i.e clean un-used/invisible DOM elements)
+==> performance issues shud take care manually 
+    (i.e DOM access should be minimal )
+==> data-binding is manual  
+==> too much code for simple operation
+==> code organization is difficult    
+
+
+----------------------------------------------------------
+ legacy soln:
+
+    ==> using server-side page techonolgies
+
+            i.e JSP, ASP, PHP , freemarker, Rails,..,...,....
+
+
+        
+    Problems:
+
+    => on every request, server-side-programs  
+       need to re-construct same UI-layout/page with new content,keeping client-state
+   
+    => on every request, server programs txring same static resources, 
+       this will increase n/w bandwidth   
+
+    => on every new-page response, browser reloads current page with new-page  
+    
+
+
+----------------------------------------------------------
+
+
+----------------------------------------------------------
+
+ best-soln:
+
+    => using client-side(browser) page technolgies    
+
+
+
+        how?
+
+           -> js-language improved lot
+           -> new APIS from w3c like storage,... 
+           -> browser also following standards in uniform way..
+
+           +
+
+           => using third-party's .js Lib & Frameworks      
+
+
+        Utility lib
+        --------------------------------
+
+        1. jQuery
+
+                ==> DOM + AJAX utility lib 
+
+        
+
+        MVC / MVVM based lib & frameworks
+        ---------------------------------
+
+        1. DOJO
+        2. Ext.js from sencha  ( commercial )
+
+        1. knockout.js
+        2. backbone.js  / marionettejs
+        3. ember.js
+        4. YUI
+        5. Angular.js 1.x    from google-team    
+        ...
+
+
+        
+
+
+        component  based lib & frameworks
+        ---------------------------------
+
+        
+        how to create custom web-components?
+
+        2 ways
+
+         ---------------------------------------------------
+        way-1: using w3c's web component spec based APIs
+        ---------------------------------------------------
+
+
+         - HTML Template
+         - Shadow DOM ( private scoped envi )
+         - Custom Elements
+
+         
+        ---------------------------------------------------
+        way-2: using third party's js lib & F.Ws
+        ---------------------------------------------------
+
+
+            1. react.js    from facebook       : v16   ( our focus  )
+            2. Angular     from google-team    : v7 
+            3. Vue.js
+            4. polymer.js 
+            7. Aurelia.js
+            6. Ember.js
+            
+            ..    
+
+
+---------------------------------------------
+
+
+      in web-UI ,
+
+      what is component ?
+      -------------------
+
+        Independent UI-fragement in web-page
+        with single-responsibility
+
+        e.g
+
+        Box, Input,....
+
+
+
+        component's principles
+        ------------------------
+
+        =>  must have single-responsibility
+        =>  must be loosly coupled from other
+        =>  can customizable via properties/attributes 
+            i.e parent-component can  customize child-component via props
+        =>  cannot change given props
+        =>  can hold state/data if required
+        =>  must re-render on state change / new props 
+        =>  data flow b/w components must be in uni-directional
+
+        ------------------------------------------
+
+
+
+
+
+
+        Javascript Testing Framework
+        ------------------------------
+
+        - Jasmine
+        - Mocha
+        - Jest from facebook
+
+            - Unit-Testing
+            - Integration
+            - Acceptance Testing with cucumber
+            - selenide
+
+        ---------------------------------    
