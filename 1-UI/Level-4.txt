@@ -1,0 +1,334 @@
+
+
+
+
+test/domManipulators.js
+
+
+    import ReactDOM from 'react-dom';
+
+    export const createContainer = () => {
+        const container = document.createElement('div');
+
+        return {
+            render: component => ReactDOM.render(component, container),
+            container
+        };
+    };
+
+
+
+test/CustomerForm.test.js
+
+    import React from 'react';
+    import { createContainer } from './domManipulators';
+    import { CustomerForm } from '../src/CustomerForm';
+
+   describe('CustomerForm', () => {
+        let render, container;
+
+        beforeEach(() => {
+            ({ render, container } = createContainer());
+        });
+    });
+
+
+    -------------------
+
+    it('renders a form', () => {
+        render(<CustomerForm />);
+        expect(
+            container.querySelector('form[id="customer"]')
+        ).not.toBeNull();
+    });    
+
+
+src/CustomerForm.js
+
+
+    export const CustomerForm = () => null;
+
+
+    --------------------
+
+    import React from 'react';
+
+    export const CustomerForm = () => <form id="customer" />;
+
+
+--------------------------------
+Extracting a form-finder method
+--------------------------------
+
+test/CustomerForm.test.js
+
+
+    const form = id => container.querySelector(`form[id="${id}"]`);
+    ----
+    expect(form('customer')).not.toBeNull();
+
+
+---------------------------------
+Accepting text input
+---------------------------------    
+
+test/CustomerForm.test.js
+
+    it('renders the first name field as a text box', () => {
+        render(<CustomerForm />);
+        const field = form('customer').elements.firstName;
+        expect(field).not.toBeNull();
+        expect(field.tagName).toEqual('INPUT');
+        expect(field.type).toEqual('text');
+    });
+
+src/CustomerForm.js
+
+    export const CustomerForm = () => (
+    <form id="customer">
+    <input
+        type="text"
+        name="firstName"
+        />
+    </form>
+    );
+
+----------------------------------------
+Extracting an expectation group function    
+----------------------------------------
+
+test/CustomerForm.test.js
+
+
+    const expectToBeInputFieldOfTypeText = formElement => {
+        expect(formElement).not.toBeNull();
+        expect(formElement.tagName).toEqual('INPUT');
+        expect(formElement.type).toEqual('text');
+    };
+
+
+----------------------------------------
+Passing in an existing value
+----------------------------------------
+
+test/CustomerForm.test.js
+
+    it('includes the existing value for the first name', () => {
+        render(<CustomerForm firstName="Ashley" />);
+        const field = form('customer').elements.firstName;
+        expect(field.value).toEqual('Ashley');
+    });
+
+src/CustomerForm.js
+
+    export const CustomerForm = ({ firstName }) => (
+    <form id="customer">
+        <input
+        type="text"
+        name="firstName"
+        value={firstName}
+        readOnly
+        />
+    </form>
+    );
+
+
+----------------------------------------
+Extracting out a field-finder function
+----------------------------------------
+
+test/CustomerForm.test.js
+
+    const field = form('customer').elements.firstName;
+    -or-
+    const firstNameField = () => form('customer').elements.firstName;
+
+
+    it('includes the existing value for the first name', () => {
+        render(<CustomerForm firstName="Ashley" />);
+        expect(firstNameField().value).toEqual('Ashley');
+    });
+
+------------------
+Labeling the field
+------------------
+
+test/CustomerForm.test.js
+
+    const labelFor = formElement =>
+    container.querySelector(`label[for="${formElement}"]`);
+
+    it('renders a label for the first name field', () => {
+        render(<CustomerForm />);
+        expect(labelFor('firstName')).not.toBeNull();
+        expect(labelFor('firstName').textContent).toEqual('First name');
+    });
+
+src/CustomerForm.js
+
+
+    <form id="customer">
+        <label htmlFor="firstName">First name</label>
+        <input
+            type="text"
+            name="firstName"
+            value={firstName}
+            readOnly
+        />
+    </form> 
+
+
+test/CustomerForm.test.js
+
+
+   it('assigns an id that matches the label id to the first name field', () => {
+        render(<CustomerForm />);
+        expect(firstNameField().id).toEqual('firstName');
+    });
+
+src/CustomerForm.js
+
+    <form id="customer">
+        <label htmlFor="firstName">First name</label>
+        <input
+            type="text"
+            name="firstName"
+            id="firstName"
+            value={firstName}
+            readOnly
+        />
+    </form>
+
+
+---------------------------------
+Saving the customer information
+---------------------------------
+
+test/CustomerForm.test.js
+
+    import ReactTestUtils from 'react-dom/test-utils';
+
+
+    it('saves existing first name when submitted', async () => {
+        expect.hasAssertions();
+    });
+
+    render(
+        <CustomerForm
+            firstName="Ashley"
+            onSubmit={({ firstName }) =>
+            expect(firstName).toEqual('Ashley')
+            }
+        />
+    );
+
+
+src/CustomerForm.js
+
+    export const CustomerForm = ({ firstName, onSubmit }) => {
+        const customer = { firstName };
+        return <form id="customer" onSubmit={() => onSubmit(customer)}>
+            <label htmlFor="firstName">First name</label>
+            <input
+                type="text"
+                name="firstName"
+                id="firstName"
+                value={firstName}
+                readOnly
+            />
+        </form>;
+    };
+
+
+
+----------------------------
+Using state instead of props
+----------------------------
+
+test/CustomerForm.test.js
+
+    it('saves new first name when submitted', async () => {
+        expect.hasAssertions();
+        render(
+            <CustomerForm
+                firstName="Ashley"
+                onSubmit={({ firstName }) =>
+                    expect(firstName).toEqual('Jamie')
+                }
+            />
+        );
+        await ReactTestUtils.Simulate.change(firstNameField(), {
+            target: { value: 'Jamie' }
+        });
+        await ReactTestUtils.Simulate.submit(form('customer'));
+    });
+
+
+src/CustomerForm.js
+
+
+    import React, { useState } from 'react';
+
+
+    ..
+
+    const [customer, setCustomer] = useState({ firstName });
+    const handleChangeFirstName = ({ target }) =>
+        setCustomer(customer => ({
+            ...customer,
+            firstName: target.value
+        }));
+    
+    ...
+    <input
+            type="text"
+            name="firstName"
+            id="firstName"
+            value={firstName}
+            onChange={handleChangeFirstName}
+        /> 
+
+
+
+-------------------
+Duplicating fields
+-------------------
+
+
+Ex.
+
+    const itRendersAsATextBox = (fieldName) =>
+    it('renders as a text box', () => {
+        render(<CustomerForm />);
+        expectToBeInputFieldOfTypeText(field(fieldName));
+    });
+
+    describe('first name field', () => {
+        itRendersAsATextBox('firstName');
+        itIncludesTheExistingValue('firstName');
+        itRendersALabel('firstName', 'First name');
+        itAssignsAnIdThatMatchesTheLabelId('firstName');
+        itSubmitsExistingValue('firstName', 'firstName');
+        itSubmitsNewValue('firstName', 'anotherFirstName');
+    });
+
+
+    ...
+
+-------------------------------------------
+Finishing off the form with a submit button
+-------------------------------------------
+
+    it('has a submit button', () => {
+        render(<CustomerForm />);
+        const submitButton = container.querySelector(
+            'input[type="submit"]'
+        );
+        expect(submitButton).not.toBeNull();
+    });
+
+
+    ...
+
+
+    <input type="submit" value="Add" />
