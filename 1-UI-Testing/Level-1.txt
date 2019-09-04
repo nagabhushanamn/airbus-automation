@@ -27,7 +27,7 @@ Creating a new Jest project
 
 mkdir appointments
 cd appointments
-npm init
+npm init   
 
 npm install --save-dev jest
 
@@ -44,8 +44,14 @@ Bringing in React and Babel
 npm install --save react react-dom
 
 npm install --save-dev @babel/preset-env @babel/preset-react
+-or-
+yarn add -D @babel/preset-env @babel/preset-react
+
 npm install --save-dev @babel/plugin-transform-runtime
-npm install --save @babel/runtime
+npm install --save-dev @babel/runtime
+
+
+
 
 touch .babelrc 
 
@@ -104,7 +110,7 @@ npm test
 
 
 ---------------------------------
-testing environment { jsdom | node }
+testing environment { jsdom => in-memory DOM | node }
 ---------------------------------
 
 
@@ -128,9 +134,7 @@ Rendering React from a test
             const component = <Appointment customer={customer} />;
             const container = document.createElement('div');
             document.body.appendChild(container);
-
             ReactDOM.render(component, container);
-
             expect(document.body.textContent).toMatch('Ashley');
         });
     });
