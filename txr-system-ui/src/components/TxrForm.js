@@ -1,14 +1,16 @@
 
 import React, { useState } from 'react';
 
-const TxrForm = (props) => {
+const TxrForm = ({ onSubmit }) => {
     const [amount, setAmount] = useState('')
     const [fromAccNumber, setFromAccNumber] = useState('')
     const [toAccNumber, setToAccNumber] = useState('')
     const handleSubmit = e => {
         e.preventDefault();
         const formData = { amount, fromAccNumber, toAccNumber }
-        console.log(formData);
+        if (onSubmit) {
+            onSubmit({ value: formData })
+        }
     };
     return (
         <div className="row">
@@ -16,7 +18,7 @@ const TxrForm = (props) => {
                 <div className="card">
                     <div className="card-header">Txr Form</div>
                     <div className="card-body">
-                        <form onSubmit={e => handleSubmit(e)}>
+                        <form id="txr-form" onSubmit={e => handleSubmit(e)}>
                             <div className="form-group">
                                 <label htmlFor="fromAccNumber">Amount</label>
                                 <input
