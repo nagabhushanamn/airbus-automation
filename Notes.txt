@@ -1,0 +1,17 @@
+
+TDD
+-----------
+
+ - Unit-Testing
+ - Integration-Testing
+
+BDD
+------------
+ - Acceptance-Testing
+
+--------------------------------------------
+
+
+- e2e testing / user-interface testing
+
+    - selenium tool
