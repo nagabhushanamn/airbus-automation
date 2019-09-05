@@ -6,9 +6,7 @@ node {
     git 'https://github.com/nagabhushanamn/airbus-automation'
     
     dir('Txr-system') {
-    	
         stage("compile and analysis") {
-
     	    parallel 'Compilation': {
                 sh "./mvnw clean install -DskipTests"
             }, 
@@ -54,7 +52,7 @@ node {
             }
         }
         stage("staging") {
-                sh "pid=\$(lsof -i:8181 -t); kill -TERM \$pid"
+                sh "pid=\$(lsof -i:8181 -t); if [ \$pid -ge 0 ]; then kill -TERM \$pid"
                 withEnv(['JENKINS_NODE_COOKIE=dontkill']) {
                     sh 'nohup ./mvnw spring-boot:run -Dserver.port=8181 &'
                 }   
