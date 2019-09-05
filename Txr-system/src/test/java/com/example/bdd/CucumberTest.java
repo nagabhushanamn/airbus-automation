@@ -1,4 +1,4 @@
-package com.example.specs;
+package com.example.bdd;
 
 import org.junit.runner.RunWith;
 
@@ -7,7 +7,7 @@ import cucumber.api.junit.Cucumber;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(plugin = "pretty", features = "src/test/resources")
-public class RunCucumberTest {
+public class CucumberTest {
 
 
 }

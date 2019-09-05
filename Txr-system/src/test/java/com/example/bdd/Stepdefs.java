@@ -1,4 +1,4 @@
-package com.example.specs;
+package com.example.bdd;
 
 import static org.junit.Assert.assertEquals;
 
