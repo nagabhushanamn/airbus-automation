@@ -52,7 +52,7 @@ node {
             }
         }
         stage("staging") {
-                sh "pid=\$(lsof -i:8181 -t); if [ \$pid -ge 0 ]; then kill -TERM \$pid"
+                sh "pid=\$(lsof -i:8181 -t); if [ \$pid -ge 0 ]; then kill -TERM \$pid fi"
                 withEnv(['JENKINS_NODE_COOKIE=dontkill']) {
                     sh 'nohup ./mvnw spring-boot:run -Dserver.port=8181 &'
                 }   
