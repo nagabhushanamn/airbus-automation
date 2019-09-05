@@ -1,0 +1,96 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TxrForm snapshot 1`] = `
+<div
+  className="row"
+>
+  <div
+    className="col-sm-5 col-md-5"
+  >
+    <div
+      className="card"
+    >
+      <div
+        className="card-header"
+      >
+        Txr Form
+      </div>
+      <div
+        className="card-body"
+      >
+        <hr />
+        <div
+          className="alert alert-info"
+        >
+          Account balance : 
+          <span
+            className="badge badge-danger"
+          >
+            1000.00
+          </span>
+        </div>
+        <hr />
+        <hr />
+        <form
+          id="txr-form"
+          onSubmit={[Function]}
+        >
+          <div
+            className="form-group"
+          >
+            <label
+              htmlFor="fromAccNumber"
+            >
+              Amount
+            </label>
+            <input
+              className="form-control"
+              id="amount"
+              onChange={[Function]}
+              type="number"
+              value=""
+            />
+          </div>
+          <div
+            className="form-group"
+          >
+            <label
+              htmlFor="fromAccNumber"
+            >
+              From Account
+            </label>
+            <input
+              className="form-control"
+              id="fromAccNumber"
+              onChange={[Function]}
+              type="number"
+              value="1"
+            />
+          </div>
+          <div
+            className="form-group"
+          >
+            <label
+              htmlFor="toAccNumber"
+            >
+              To Account
+            </label>
+            <input
+              className="form-control"
+              id="toAccNumber"
+              onChange={[Function]}
+              type="number"
+              value=""
+            />
+          </div>
+          <button
+            className="btn btn-dark"
+          >
+            Txr
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+`;

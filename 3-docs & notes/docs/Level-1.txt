@@ -1,0 +1,210 @@
+
+
+----------------------------------------------------
+Technical requirements
+----------------------------------------------------
+
+
+- Node.js runtime
+- NPM 
+- IDE e.g VS code
+
+
+----------------------------------------------------
+Creating a new React project from scratch
+----------------------------------------------------
+
+
+Installing NPM
+--------------
+
+npm -v
+npm install npm@latest -g
+
+
+Creating a new Jest project
+-----------------------------
+
+mkdir appointments
+cd appointments
+npm init   
+
+npm install --save-dev jest
+
+git init
+echo "node_modules" > .gitignore
+git add .
+git commit -m "Blank project with Jest dependency"
+
+
+
+Bringing in React and Babel
+--------------------------
+
+npm install --save react react-dom
+
+npm install --save-dev @babel/preset-env @babel/preset-react
+-or-
+yarn add -D @babel/preset-env @babel/preset-react
+
+npm install --save-dev @babel/plugin-transform-runtime
+npm install --save-dev @babel/runtime
+
+
+
+
+touch .babelrc 
+
+
+    {
+    "presets": ["@babel/env", "@babel/react"],
+    "plugins": ["@babel/transform-runtime"]
+    }
+
+
+
+
+Displaying data with your first test
+-------------------------------------
+
+Ref : /screens/1.png
+
+data
+------
+
+    {
+    customer: { firstName: 'Ashley', lastName: 'Jones', phoneNumber: '(123) 555-0123' },
+    stylist: 'Jay Speares',
+    startsAt: '2019-02-02 09:30',
+    service: 'Cut',
+    notes: ''
+    }
+
+
+Writing a failing test
+---------------------------------
+
+mkdir test
+touch test/Appointment.test.js
+
+    describe('Appointment', () => {
+    });
+
+
+npm test
+
+    describe('Appointment', () => {
+        it('renders the customer first name', () => {
+        });
+    });
+
+
+npm test
+
+   
+    describe('Appointment', () => {
+        it('renders the customer first name', () => {
+            expect(document.body.textContent).toMatch('Ashley');
+        });
+    });
+
+
+---------------------------------
+testing environment { jsdom => in-memory DOM | node }
+---------------------------------
+
+
+package.json
+
+    "jest": {
+        "testEnvironment": "jsdom | node"
+    }
+
+
+Rendering React from a test
+---------------------------
+
+    import React from 'react';
+    import ReactDOM from 'react-dom';
+    import { Appointment } from '../src/Appointment';
+
+    describe('Appointment', () => {    
+        it('renders the customer first name', () => {
+            const customer = { firstName: 'Ashley' };
+            const component = <Appointment customer={customer} />;
+            const container = document.createElement('div');
+            document.body.appendChild(container);
+            ReactDOM.render(component, container);
+            expect(document.body.textContent).toMatch('Ashley');
+        });
+    });
+
+
+
+Make it pass    
+-------------
+
+mkdir src
+touch src/Appointment.js
+
+    export const Appointment = () => (
+        <div>Ashley</div>
+    );
+
+
+
+one more test
+-------------
+
+    it('renders another customer first name', () => {
+        const customer = { firstName: 'Jordan' };
+        const component = <Appointment customer={customer} />;
+        const container = document.createElement('div');
+        document.body.appendChild(container);
+
+        ReactDOM.render(component, container);
+
+        expect(document.body.textContent).toMatch('Jordan');
+    });
+
+
+    
+
+Refactoring your work
+----------------------
+
+
+    describe('Appointment', () => {
+
+        let container;
+        let customer;
+
+        beforeEach(() => {
+            container = document.createElement('div');
+        });
+
+        const render = component => ReactDOM.render(component, container);
+
+        it('renders the customer first name', () => {
+            customer = { firstName: 'Ashley' };
+            const component = <Appointment customer={customer} />;
+            render(component);
+            expect(container.textContent).toMatch('Ashley');
+        });
+
+        it('renders another customer first name', () => {
+            customer = { firstName: 'Jordan' };
+            const component = <Appointment customer={customer} />;
+            render(component);
+            expect(container.textContent).toMatch('Jordan');
+        });
+
+    });
+
+
+
+-------------------------------------------------------------------
+
+TDD
+
+
