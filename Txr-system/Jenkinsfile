@@ -54,7 +54,7 @@ node {
             }
         }
         stage("staging") {
-                sh "kill $(lsof -t -i:8181)"
+                sh "kill \$(lsof -t -i:8181)"
                 withEnv(['JENKINS_NODE_COOKIE=dontkill']) {
                     sh 'nohup ./mvnw spring-boot:run -Dserver.port=8181 &'
                 }   
