@@ -53,10 +53,10 @@ node {
                 }
             }
         }
-        stage("Staging") {
-                sh "pid=\$(lsof -i:8989 -t); kill -TERM \$pid || kill -KILL \$pid"
+        stage("staging") {
+                sh "kill $(lsof -t -i:8181)"
                 withEnv(['JENKINS_NODE_COOKIE=dontkill']) {
-                    sh 'nohup ./mvnw spring-boot:run -Dserver.port=8989 &'
+                    sh 'nohup ./mvnw spring-boot:run -Dserver.port=8181 &'
                 }   
         }    
     }
