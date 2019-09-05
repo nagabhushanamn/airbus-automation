@@ -39,7 +39,7 @@ describe('TxrForm', () => {
         ReactTestUtils.Simulate.submit(form);
     })
 
-    it('should return form-data', () => {
+    it('should return form-data', async () => {
         expect.hasAssertions();
         let expected = { amount: 100.00, fromAccNumber: '1', toAccNumber: '2' }
         const callback = e => {
@@ -53,16 +53,15 @@ describe('TxrForm', () => {
         const toAccNumberField = findFormField('txr-form', 'toAccNumber')
         const amountField = findFormField('txr-form', 'amount')
 
-        ReactTestUtils.Simulate.change(amountField, {
+        await ReactTestUtils.Simulate.change(amountField, {
             target: { value: 100 }
         });
-        ReactTestUtils.Simulate.change(fromAccNumberField, {
+        await ReactTestUtils.Simulate.change(fromAccNumberField, {
             target: { value: '1' }
         });
-        ReactTestUtils.Simulate.change(toAccNumberField, {
+        await ReactTestUtils.Simulate.change(toAccNumberField, {
             target: { value: '2' }
         });
-
         ReactTestUtils.Simulate.submit(form);
     })
 
