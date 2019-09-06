@@ -3,10 +3,13 @@
 node {
 
     stage 'checkout'
+    
     git 'https://github.com/nagabhushanamn/airbus-automation'
     
     dir('Txr-system') {
+    
         stage("compile and analysis") {
+        
     	    parallel 'Compilation': {
                 sh "./mvnw clean install -DskipTests"
             }, 
@@ -24,6 +27,7 @@ node {
                 }    
     	    }
         }
+        
         stage("tests") {
             parallel 'Unit tests': {
                 stage("unit tests") {
@@ -51,6 +55,7 @@ node {
                 }
             }
         }
+        
         stage("staging") {
                 sh 'pid=\$(lsof -i:8181 -t); [ -z "\$pid" ] && echo "Empty" || kill -TERM \$pid'
                 withEnv(['JENKINS_NODE_COOKIE=dontkill']) {
