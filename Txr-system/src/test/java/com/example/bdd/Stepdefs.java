@@ -22,7 +22,7 @@ public class Stepdefs extends CucumberStepDefinitions {
 	@Given("^account with (\\d+) balance$")
 	public void given(double balance) {
 	}
-
+	
 	@When("^transfer (\\d+)$")
 	public void when(double amount) {
 		account = this.txrService.transfer(amount, "1", "2");
