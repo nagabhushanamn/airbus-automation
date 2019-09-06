@@ -19,7 +19,7 @@ public class TxrController {
 	@Autowired
 	private TxrService txrService;
 
-	@PostMapping(value = "/api/txr")
+	@PostMapping(value = "/txr")
 	public @ResponseBody TxrResponse doTxr(@RequestBody TxrRequest request) {
 		
 		Account account = txrService.transfer(
