@@ -8,8 +8,8 @@ pipeline {
             args '-p 3000:3000' 
         }
     }
-    git branch: 'master',
-        url: 'https://github.com/nagabhushanamn/airbus-automation'
+    
+    git 'https://github.com/nagabhushanamn/airbus-automation'
     
     dir("Txr-system-UI") {
         stages {
