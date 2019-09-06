@@ -13,7 +13,14 @@ pipeline {
         stage('test') { 
             steps {
                 dir('Txr-system-UI') {
-                    sh 'npm test' 
+                    
+                }
+            }
+        }
+        stage('build') { 
+            steps {
+                dir('Txr-system-UI') {
+                    sh 'npm run build' 
                 }
             }
         }
