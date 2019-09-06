@@ -10,9 +10,11 @@ pipeline {
     git 'https://github.com/nagabhushanamn/airbus-automation'
     stages {
         stage('build') { 
-            dir("Txr-system-UI") {
-                steps {
-                    sh 'npm install' 
+            steps{
+                dir("Txr-system-UI") {
+                    steps {
+                        sh 'npm install' 
+                    }
                 }
             }
         }
