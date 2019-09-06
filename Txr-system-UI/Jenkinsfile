@@ -7,7 +7,6 @@ pipeline {
             args '-p 3000:3000' 
         }
     }
-    git 'https://github.com/nagabhushanamn/airbus-automation'
     stages {
         stage('build') { 
             steps{
