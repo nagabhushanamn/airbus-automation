@@ -4,11 +4,18 @@ pipeline {
     agent any
     stages {
         stage('install dependencies') { 
-                steps {
-                    dir('Txr-system-UI') {
-                        sh 'npm install' 
-                    }
+            steps {
+                dir('Txr-system-UI') {
+                    sh 'npm install' 
                 }
             }
+        }
+        stage('test') { 
+            steps {
+                dir('Txr-system-UI') {
+                    sh 'npm test' 
+                }
+            }
+        }
     }
 }
