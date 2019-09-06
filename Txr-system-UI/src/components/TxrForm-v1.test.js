@@ -4,7 +4,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import ReactTestUtils from 'react-dom/test-utils'
 
-import TxrForm from './TxrForm'
+import {TxrForm} from './TxrForm'
 
 
 

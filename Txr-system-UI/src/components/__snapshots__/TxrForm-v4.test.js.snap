@@ -7,6 +7,8 @@ exports[`TxrForm snapshot 1`] = `
   <div
     className="col-sm-5 col-md-5"
   >
+    <hr />
+    <hr />
     <div
       className="card"
     >
@@ -18,19 +20,6 @@ exports[`TxrForm snapshot 1`] = `
       <div
         className="card-body"
       >
-        <hr />
-        <div
-          className="alert alert-info"
-        >
-          Account balance : 
-          <span
-            className="badge badge-danger"
-          >
-            1000.00
-          </span>
-        </div>
-        <hr />
-        <hr />
         <form
           id="txr-form"
           onSubmit={[Function]}
@@ -48,7 +37,7 @@ exports[`TxrForm snapshot 1`] = `
               id="amount"
               onChange={[Function]}
               type="number"
-              value=""
+              value={100}
             />
           </div>
           <div
@@ -80,7 +69,7 @@ exports[`TxrForm snapshot 1`] = `
               id="toAccNumber"
               onChange={[Function]}
               type="number"
-              value=""
+              value="2"
             />
           </div>
           <button

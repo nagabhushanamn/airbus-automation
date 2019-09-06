@@ -1,18 +1,15 @@
 
 import React, { useState } from 'react';
-import AccountBalance from './AccountBalance';
 
 import { connect } from 'react-redux';
-import { txr } from '../actions/account'
+import { txr } from '../actions/txr'
 
-const TxrForm = ({ onSubmit, txr }) => {
-    const [status, setStatus] = useState('')
-    const [amount, setAmount] = useState('')
+export const TxrForm = ({ onSubmit, txr, message }) => {
+    const [amount, setAmount] = useState(100)
     const [fromAccNumber, setFromAccNumber] = useState('1')
-    const [toAccNumber, setToAccNumber] = useState('')
+    const [toAccNumber, setToAccNumber] = useState('2')
     const handleSubmit = e => {
         e.preventDefault();
-        setStatus("Txring...")
         const formData = { amount, fromAccNumber, toAccNumber }
         if (onSubmit) {
             onSubmit({ value: formData })
@@ -21,15 +18,10 @@ const TxrForm = ({ onSubmit, txr }) => {
     };
     return (
         <div className="row">
-            <div className="col-sm-5 col-md-5">
+            <div className="col-sm-8 col-md-8">
                 <div className="card">
                     <div className="card-header">Txr Form</div>
                     <div className="card-body">
-                        <hr />
-                        <AccountBalance />
-                        <hr />
-                        {status ? <div className="alert alert-warning">{status}</div> : null}
-                        <hr />
                         <form id="txr-form" onSubmit={e => handleSubmit(e)}>
                             <div className="form-group">
                                 <label htmlFor="fromAccNumber">Amount</label>
@@ -71,6 +63,12 @@ const TxrForm = ({ onSubmit, txr }) => {
     );
 };
 
+
+const mapStateToProps = (state) => {
+    return {
+        message: state.txr.message || ''
+    }
+}
 const mapDispatchToProps = { txr }
 
-export default connect(null, mapDispatchToProps)(TxrForm);
+export default connect(mapStateToProps, mapDispatchToProps)(TxrForm);

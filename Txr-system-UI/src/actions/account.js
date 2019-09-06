@@ -1,14 +1,12 @@
 
-import txrApi from '../api/txr'
+import accountApi from '../api/account'
 
-export function txr(formData) {
+export function loadAccount(number) {
     return function (dispatch) {
-        txrApi.post('/txr', formData)
-            .then(result => {
-                dispatch({ type: "TXR_SUCCESS", status: result })
-            })
-            .catch(error => {
-                dispatch({ type: "TXR_FAILED", error })
+        accountApi.get("/accounts/" + number)
+            .then(response => response.data)
+            .then(account => {
+                dispatch({ type: 'LOAD_ACCOUNT_SUCCESS', account })
             })
     }
 }

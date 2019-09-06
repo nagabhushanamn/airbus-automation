@@ -2,8 +2,8 @@
 
 import { combineReducers } from 'redux';
 
-import { accountReducer } from './account';
+import { txrReducer } from './txr';
 
 export default combineReducers({
-    account: accountReducer
+    txr: txrReducer
 })

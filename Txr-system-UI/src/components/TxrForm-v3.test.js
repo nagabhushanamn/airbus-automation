@@ -6,7 +6,7 @@ import ReactTestUtils from 'react-dom/test-utils'
 
 import sinon from 'sinon'
 
-import TxrForm from './TxrForm'
+import {TxrForm} from './TxrForm'
 
 import Enzyme, { shallow, mount, render } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
