@@ -5,9 +5,9 @@ import { connect } from 'react-redux';
 import { txr } from '../actions/txr'
 
 export const TxrForm = ({ onSubmit, txr, message }) => {
-    const [amount, setAmount] = useState(100)
-    const [fromAccNumber, setFromAccNumber] = useState('1')
-    const [toAccNumber, setToAccNumber] = useState('2')
+    const [amount, setAmount] = useState('')
+    const [fromAccNumber, setFromAccNumber] = useState('')
+    const [toAccNumber, setToAccNumber] = useState('')
     const handleSubmit = e => {
         e.preventDefault();
         const formData = { amount, fromAccNumber, toAccNumber }

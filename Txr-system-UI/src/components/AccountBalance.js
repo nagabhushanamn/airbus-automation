@@ -10,7 +10,7 @@ export const AccountBalance = ({ account }) => {
             <div className="card-body">
                 number  : <span className="badge">{account.number}</span>
                 <br />
-                balance : <span className="badge">{account.balance}</span>
+                balance : <span id="balance" className="badge">{account.balance}</span>
             </div>
         </div>
     );

@@ -1,0 +1,290 @@
+
+
+
+JVM languages
+----------------
+
+    - java
+    - scala 
+    - groovy  ==> scripting language
+
+        tools
+
+            - jenkins 
+            - soapui 
+
+    - kotlin        
+
+--------------------------
+Groovy Basics
+--------------------------
+
+
+Optional semicolons
+-------------------
+
+def someString = "this statement has a semicolon";
+def someOtherString = "this one does not"
+
+Objects
+-------
+
+// calling method doSomething on someObject
+someObject.doSomething()
+
+// calling method doSomethingElse with one argument
+someObject.doSomethingElse("a string argument")
+
+// get the property named someProperty on someObject
+someObject.someProperty
+
+Optionally typed
+----------------
+
+explicit typing
+Person person = new Person()
+
+// using def
+def person2 = new Person()
+
+
+
+String addThem(String str1, String str2) {
+    return str1 + str2
+}
+
+String added = addThem("Smart", "Things");
+assert "SmartThings" == added
+
+// fails!
+assert 3 == addThem(1, 2)
+
+
+def addThem(str1, str2) {
+    // strings and numbers support the + operator
+    return str1 + str2
+}
+
+def added = addThem("Smart", "Things")
+assert added == "SmartThings"
+
+def added2 = addThem(4, 2)
+assert added2 == 6
+
+
+Operators
+---------
+
+def phrases = location.getHelloHome().getPhrases()
+
+def hh = location.getHelloHome()
+def phrases
+// recall that non-null objects are "true"
+if (hh) {
+    phrases = hh.getPhrases()
+}
+
+// or
+def phrases = location.getHelloHome()?.getPhrases()
+
+
+Strings
+-------
+
+def a = "some string"
+def b = 'another string'
+def c = '''Triple quotes
+           allow multiple
+           lines'''
+
+
+def name = "Your Name"
+def greeting = "Hello, ${name}"
+assert "Hello, Your Name" == greeting
+
+
+Lists and Maps
+--------------
+
+#1
+
+// simple list of Numbers
+def myList = [2, 3, 5, 8, 13, 21]
+
+// use the << operator to append items to a list
+myList << 34
+assert myList == [2, 3, 5, 8, 13, 21, 34]
+
+// get elements in a list
+// first element is at index 0
+assert 8 == myList[3]
+
+// can use negative index to start from the end
+assert 21 == myList[-2]
+
+// lists can support different types of data
+def myMixedList = [1, "two", true]
+
+
+#2
+
+// simple map of key/value pairs
+def myMap = [key1: "value1", key2: "value2"]
+
+// can get value for a key with the "." notation:
+assert "value1" == myMap.key1
+
+// can also get the value using subscript notation:
+assert "value2" == myMap['key2']
+
+// a list of maps
+def listOfMaps = [[key1: "val1", key2: "val2"],
+                  [key1: "another val", key2: "and another"]]
+assert "another val" == listOfMaps[1].key1
+
+
+Control structures
+------------------
+
+
+
+
+Calling methods
+---------------
+
+def myMethod() {
+    // ...
+}
+
+def myOtherMethod(someArg1, someArg2) {
+    // ...
+}
+
+myMethod()          // OK
+myMethod            // error
+myOtherMethod(2, 3) // OK
+myOtherMethod 4, 5  // OK
+
+
+Getters and setters
+-------------------
+
+
+def getSomeValue() {
+    return "got it"
+}
+
+assert "got it" == someValue
+
+
+Defining methods
+----------------
+
+
+// arguments types are optional:
+def asMap(arg1, arg2) {
+    return [arg1: arg2]
+}
+assert [key: "val"] == asMap("key", "val")
+
+// can use typed arguments as well
+Map asMapWithTypedArgs(String arg1, String arg2) {
+    return [arg1: arg2]
+}
+assert [key: "another val"] = asMap("key", "another val")
+
+
+
+def asMap(arg1, arg2) {
+    // no return statement
+    [arg1: arg2]
+}
+assert [key: "val"] == asMap("key", "val")
+
+
+
+
+def defaultParams(first, last, middle = "") {
+    "Welcome, $first $middle $last"
+}
+
+def greetGeorge = defaultParams("George", "Costanza", "Louis")
+def greetKramer = defaultParams("Cosmo", "Kramer")
+
+assert "Welcome, George Louis Costanza" == greetGeorge
+assert "Welcome, Cosmo  Kramer" == greetKramer
+
+
+Exception handling
+------------------
+
+
+try {
+    someMethodThatMightGoBoom()
+} catch (e)
+    // log the error message, and/or handle in some way
+}
+
+
+
+Closures
+--------
+
+def list = [1, 2, 3, 4]
+for (int i = 0; i < list.size(); i++) {
+    println list[i]
+}
+
+// or
+
+def list [1, 2, 3, 4]
+list.each {num ->
+    println num
+}
+
+
+
+
+def greaterThan50(nums) {
+    def result = []
+    for (num in nums) {
+        if (num > 50) {
+            result << num
+        }
+    }
+    result
+}
+
+def test = greaterThan50([2, 5, 62, 50, 25, 88])
+assert 2 == test.size()
+assert test.contains(62)
+assert test.contains(88)
+
+// or
+
+def greaterThan50(nums) {
+    // findAll returns a list of items
+    // that match the condition specified in the passed-in closure
+        nums.findAll {
+            it > 50
+        }
+}
+
+def test = greaterThan50([2, 5, 62, 50, 25, 88])
+assert 2 == test.size()
+assert test.contains(62)
+assert test.contains(88)
+
+
+
+
+
+def pickEven(n, block) {
+    for (int i=2; i <= n; i += 2) {
+        block(i)
+    }
+}
+
+pickEven(10) {
+    println it
+}
