@@ -5,23 +5,17 @@ pipeline {
     stages {
         stage('install dependencies') { 
                 steps {
-                    dir("Txr-system-UI") {
-                        sh 'npm install' 
-                    }
+                    sh 'npm install' 
                 }
             }
         stage('test') { 
                 steps {
-                    dir("Txr-system-UI") {
-                        sh 'npm test' 
-                    }
+                    sh 'npm test' 
                 }
             }
         stage('build') { 
                 steps {
-                    dir("Txr-system-UI") {
-                        sh 'npm run build' 
-                    }
+                    sh 'npm run build' 
                 }
             }
         }
