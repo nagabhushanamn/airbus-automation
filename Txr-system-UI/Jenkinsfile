@@ -10,7 +10,6 @@ pipeline {
                     }
                 }
             }
-        }
         stage('test') { 
                 steps {
                     dir("Txr-system-UI") {
@@ -18,7 +17,6 @@ pipeline {
                     }
                 }
             }
-        }
         stage('build') { 
                 steps {
                     dir("Txr-system-UI") {
