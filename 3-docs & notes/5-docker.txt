@@ -1,0 +1,95 @@
+
+
+process
+-------------
+
+    => to run process on any computer , what we need ?
+
+    high level
+    ----------
+        => cpu
+        => memory
+
+    low-level
+    ----------    
+        => OS packages
+        => programming language runtime
+        => environment variables
+        => dependencies
+        => configuration files
+        => file-sysytem
+        => code
+
+
+
+    ---------------------------------
+
+    e.g
+
+       appln-1 : Txr-system    
+
+            - cent-os linux packages
+            - JRE 8
+            - 
+            - spring dependencies
+            - .properties | .yml
+            - 
+            - .class.jar
+
+        appln-2 : order-system 
+
+             - ubuntu-os linux packages
+            - JRE 9
+            - 
+            - spring dependencies
+            - .properties | .yml
+            - 
+            - .class.jar
+
+    ---------------------------------
+
+
+    solutions for s/w virtualizations
+
+        => containerization   technology..
+
+            e.g docker
+
+    ----------------------------------
+
+
+    what is docker ?
+
+        -> build i.e create image  => snap all resource(s) required to run process
+        -> ship  i.e push the image into repository/registry 
+        -> run   i.e  create container(s) => launch process 
+
+    ----------------------------------
+
+
+    How ?
+
+    docker platform/engine
+    ----------------------------
+
+        1. docker-server / daemon
+
+            -> create & managing container(s)
+
+        2. docker-client ( cli / GUI )               
+
+
+     --------------------------------------
+
+    - docker-compose
+
+     orchestration/clustering tools
+
+     - docker-swarm
+     - kubernetes   ( popular )
+     - Apache mesos
+
+
+
+            
+
